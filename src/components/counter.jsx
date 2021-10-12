@@ -2,23 +2,47 @@ import React, { Component } from 'react';
 class Counter extends React.Component {
     state= {
         count :0, 
-        tags : ['tag1', 'tag2', 'tag3']
+        tags : []
     };
+
+    // constructor(){
+    //     super()
+    //    this.handleIncrement = this.handleIncrement.bind(this)
+    //     console.log('we are in a constructor', this)
+    // }
     style ={
         fontSize : 10,
         fontWeight : 'bold'
+    }
+    // renderTags(){
+    //     if (this.state.tags.length === 0)
+    //         return 'there are no tags!'
+    //         return <ul>
+    //         { this.state.tags.map(tag => <li key = {tag}>{tag}</li>)}
+    //     </ul>
+        
+    // }
+    handleIncrement = e =>{ // use arrow functions instead of creating a constructor
+        console.log (  e); 
+        this.setState({count : this.state.count + 1})
+    }
+    doHandleIncrement =() =>{
+        this.handleIncrement ({id : 1})
     }
     render() {        
         return (
         <React.Fragment>
             <span style ={this.style} className = { this.getBadgeColour()}>{this.formatCount()}</span>
-            <button style ={{fontSize :30}} className ='btn btn-secondary btn-sm'>add</button>
+            <button onClick = {this.doHandleIncrement} style ={{fontSize :30}} className ='btn btn-secondary btn-sm'>add</button>
             <ul>
                 { this.state.tags.map(tag => <li key = {tag}>{tag}</li>)}
             </ul>
+            {/* {this.state.tags.length ===0 && "please craete a new tag!"}
+            {this.renderTags()} */}
         </React.Fragment>
         );
     }
+
     getBadgeColour() {
         let classes = 'badge m-2 badge-';
         classes += (this.state.count === 0) ? "warning" : "primary";
